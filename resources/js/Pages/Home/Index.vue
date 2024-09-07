@@ -1,10 +1,12 @@
 <template>
 
         
-        <div class="flex flex-col justify-center px-2 py-12 bg-scroll md:p-12 " >
+        <div class="flex flex-col justify-center px-2 py-12 bg-scroll md:p-12  bg-gray-100 h-screen" >
             <div data-aos="fade" class="w-full text-center contents lg:flex-shrink-0">
-                <img class="w-64 h-64 mx-auto rounded-full xl:h-64 xl:w-64" src="https://cdn.mattgilpin.au/images/scotchegg.jpg" alt="">
+                <img class="w-[32rem] h-[32rem] mx-auto rounded-full " src="https://cdn.mattgilpin.au/images/scotchegg.jpg" alt="">
             </div>
+
+            <div class="text-7xl font-semibold text-gray-700 mx-auto my-12">Scotch egg</div>
         </div>
 
 </template>
