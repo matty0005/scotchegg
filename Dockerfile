@@ -11,12 +11,13 @@ RUN apt update && apt install -y \
     libonig-dev \
     libxml2-dev \
     unzip \ 
-    zlib1g-dev
+    zlib1g-dev \
+    libzip-dev
 # Clear cache
 RUN apt clean && rm -rf /var/lib/apt/lists/*
 
 # Install PHP extensions
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip  # Add 'zip'
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip 
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
