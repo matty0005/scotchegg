@@ -1,6 +1,33 @@
 version: '3'
 
 services:
+  app:
+    build:
+      args:
+        user: matt
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile
+    image: scotchegg-app-img:latest
+    container_name: scotchegg-app
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+    networks:
+      - laravel-network
+
+  nginx:
+    image: nginx:alpine
+    container_name: nginx-server
+    restart: unless-stopped
+    ports:
+      - 80:80
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/nginx:/etc/nginx/conf.d/
+    networks:
+      - laravel-network
   mysql-db:
     image: mysql
     restart: unless-stopped
@@ -14,6 +41,9 @@ services:
       MYSQL_PASSWORD: ${DB_PASSWORD}
     ports:
       - "3306:3306"
+
+    networks:
+      - laravel-network
 
   redis:
     image: redis
@@ -36,3 +66,7 @@ services:
 
 volumes:
     db_data: {}
+
+networks:
+  laravel-network:
+    driver: bridge
