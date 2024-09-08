@@ -12,7 +12,9 @@ RUN apt update && apt install -y \
     libxml2-dev \
     unzip \ 
     zlib1g-dev \
-    libzip-dev
+    libzip-dev \
+    vim \
+    net-tools
 # Clear cache
 RUN apt clean && rm -rf /var/lib/apt/lists/*
 
@@ -30,3 +32,6 @@ RUN mkdir -p /home/$user/.composer && \
 WORKDIR /var/www
 
 USER $user
+
+EXPOSE 9000
+
