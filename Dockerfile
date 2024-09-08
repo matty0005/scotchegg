@@ -11,8 +11,9 @@ RUN apt update && apt install -y \
     libonig-dev \
     libxml2-dev \
     unzip \  # Install unzip utility
-    zlib1g-dev # Required for zip PHP extension
-
+    zip \  # Install zip utility
+    php-zip  # Install PHP zip extension
+   
 # Clear cache
 RUN apt clean && rm -rf /var/lib/apt/lists/*
 
