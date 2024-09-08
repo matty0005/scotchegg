@@ -10,11 +10,18 @@ RUN apt update && apt install -y \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
-    unzip \ 
+    unzip \
     zlib1g-dev \
     libzip-dev \
     vim \
-    net-tools
+    net-tools \
+    gnupg \
+    software-properties-common
+
+# Install Node.js and npm
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+    && apt install -y nodejs
+
 # Clear cache
 RUN apt clean && rm -rf /var/lib/apt/lists/*
 
@@ -33,5 +40,8 @@ WORKDIR /var/www
 
 USER $user
 
-EXPOSE 9000
+# Install npm dependencies and build assets
+COPY --chown=$user:$user . /var/www
+RUN npm install && npm run build
 
+EXPOSE 9000
