@@ -38,9 +38,12 @@ RUN mkdir -p /home/$user/.composer && \
 
 WORKDIR /var/www
 
+# Set permissions for /var/www
+RUN chown -R $user:$user /var/www
+
 USER $user
 
-# Install npm dependencies and build assets
+# Copy application files and install npm dependencies
 COPY --chown=$user:$user . /var/www
 RUN npm install && npm run build
 
